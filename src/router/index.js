@@ -1,23 +1,41 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 
 Vue.use(VueRouter);
+
+
+// function guardMyroute(to, from, next)
+// {
+//   var isAuthenticated= false;
+
+//   if(localStorage.getItem('userId'))
+//     isAuthenticated = true;
+//   else
+//     isAuthenticated= false;
+//   if(isAuthenticated)
+//   {
+//     next(); // allow to enter route
+//   }
+//   else
+//   {
+//     next({name: 'login'}); // go to '/login';
+//   }
+// }
 
 const routes = [
   {
     path: "/",
-    name: "Home",
-    component: Home
+    name: "login",
+    component: () => import("@/views/auth/login.vue"),
+    meta: {
+      rule: "editor"
+    }
   },
   {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: "/",
+    name: "Home",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+      import(/* webpackChunkName: "about" */ "@/views/pages/Home.vue")
   }
 ];
 
